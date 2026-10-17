@@ -1,0 +1,156 @@
+import '../models/game.dart';
+
+// dates are relative to today, so the app always has upcoming and past games
+List<Game> seedGames() {
+  final today = DateTime.now();
+  DateTime day(int days, int hour, [int minute = 0]) =>
+      DateTime(today.year, today.month, today.day + days, hour, minute);
+
+  return [
+    Game(
+      id: '1',
+      title: 'Catan night for beginners',
+      category: GameCategory.strategy,
+      startsAt: day(2, 19),
+      place: 'KBTU, room 402',
+      seats: 4,
+      players: const ['Aida', 'Dias'],
+      notes: 'We explain the rules in the first 15 minutes.',
+    ),
+    // 60 characters in the title
+    Game(
+      id: '2',
+      title: 'Twilight Imperium marathon with every faction and expansion!',
+      category: GameCategory.strategy,
+      startsAt: day(6, 11),
+      place: 'Library, group study room B',
+      seats: 6,
+      players: const ['Arman', 'Kamila', 'Yerlan'],
+      notes: 'Bring snacks, it takes the whole day.',
+      favourite: true,
+    ),
+    // full: 8 of 8 seats taken
+    Game(
+      id: '3',
+      title: 'Codenames tournament',
+      category: GameCategory.party,
+      startsAt: day(1, 18, 30),
+      place: 'Student hall, 2nd floor',
+      seats: 8,
+      players: const [
+        'Aida',
+        'Dias',
+        'Madina',
+        'Alikhan',
+        'Zhanel',
+        'Arman',
+        'Kamila',
+        'Yerlan',
+      ],
+      notes: 'Teams of four, the winners get a free coffee.',
+    ),
+    // past game
+    Game(
+      id: '4',
+      title: 'Werewolf at the dorm',
+      category: GameCategory.deduction,
+      startsAt: day(-3, 21),
+      place: 'Dorm 2, common room',
+      seats: 15,
+      players: const ['Madina', 'Alikhan', 'Zhanel'],
+      notes: 'Lights off at 22:00, use your phone flashlight.',
+    ),
+    // online: the place is a link
+    Game(
+      id: '5',
+      title: 'Online Dominion league',
+      category: GameCategory.cards,
+      startsAt: day(3, 20),
+      place: 'https://dominion.games',
+      seats: 6,
+      players: const ['Dias'],
+      online: true,
+      notes: 'Create an account before the game starts.',
+    ),
+    // no notes
+    Game(
+      id: '6',
+      title: 'Pandemic: save the world',
+      category: GameCategory.cooperative,
+      startsAt: day(5, 18),
+      place: 'Board game cafe "Meeple", Abay 52',
+      seats: 4,
+      players: const ['Kamila'],
+    ),
+    Game(
+      id: '7',
+      title: 'Exploding Kittens and pizza',
+      category: GameCategory.cards,
+      startsAt: day(4, 19),
+      place: 'KBTU, room 305',
+      seats: 10,
+      players: const [
+        'Aida',
+        'Madina',
+        'Arman',
+        'Zhanel',
+        'Yerlan',
+        'Alikhan',
+        'Dias',
+      ],
+      notes: 'Pizza is 1500 tg per person.',
+      favourite: true,
+    ),
+    Game(
+      id: '8',
+      title: 'Spirit Island co-op evening',
+      category: GameCategory.cooperative,
+      startsAt: day(8, 17),
+      place: 'Library, group study room A',
+      seats: 4,
+      players: const ['Yerlan'],
+      notes: 'Hard game, the first round is a tutorial.',
+    ),
+    Game(
+      id: '9',
+      title: 'Secret Hitler: Friday edition',
+      category: GameCategory.deduction,
+      startsAt: day(9, 20),
+      place: 'Student hall, 1st floor',
+      seats: 10,
+      players: const ['Alikhan', 'Zhanel'],
+      notes: 'Minimum five players, otherwise we play Avalon.',
+    ),
+    Game(
+      id: '10',
+      title: 'Chess and Go open table',
+      category: GameCategory.strategy,
+      startsAt: day(11, 16),
+      place: 'KBTU, main lobby',
+      seats: 20,
+      players: const ['Arman', 'Madina', 'Dias', 'Kamila'],
+      notes: 'Boards and clocks are provided.',
+    ),
+    Game(
+      id: '11',
+      title: 'Dixit and coffee',
+      category: GameCategory.party,
+      startsAt: day(13, 15),
+      place: 'Coffee Boom, Tole bi 59',
+      seats: 6,
+      players: const ['Zhanel', 'Aida'],
+      notes: 'Everyone buys their own coffee.',
+      favourite: true,
+    ),
+    Game(
+      id: '12',
+      title: 'Ticket to Ride: Europe',
+      category: GameCategory.strategy,
+      startsAt: day(-10, 18),
+      place: 'KBTU, room 402',
+      seats: 5,
+      players: const ['Dias', 'Yerlan', 'Kamila', 'Madina'],
+      notes: 'Arman won with the longest route.',
+    ),
+  ];
+}
