@@ -1,47 +1,43 @@
 import 'package:flutter/material.dart';
 
+import 'book_row.dart';
 import 'cart_badge.dart';
-import 'main.dart';
+import 'models/book.dart';
 
-class BooksScreen extends StatelessWidget {
-  const BooksScreen({
-    super.key,
-    required this.cart,
-    required this.total,
-    required this.onAdd,
-  });
+class BooksScreen extends StatefulWidget {
+  const BooksScreen({super.key});
 
-  final List<Book> cart;
-  final int total;
-  final void Function(Book) onAdd;
+  @override
+  State<BooksScreen> createState() => _BooksScreenState();
+}
+
+class _BooksScreenState extends State<BooksScreen> {
+  // search text is only used here, so it stays in this State
+  String _search = '';
 
   @override
   Widget build(BuildContext context) {
     debugPrint('BooksScreen build');
+
+    final List<Book> shown = [];
+    for (final b in books) {
+      if (b.title.toLowerCase().contains(_search.toLowerCase())) {
+        shown.add(b);
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Books'),
-        actions: [CartBadge(count: cart.length, total: total)],
+        title: TextField(
+          decoration: const InputDecoration(
+            hintText: 'Search books',
+            border: InputBorder.none,
+          ),
+          onChanged: (text) => setState(() => _search = text),
+        ),
+        actions: const [CartBadge()],
       ),
-      body: ListView(children: [for (final b in books) _row(b)]),
-    );
-  }
-
-  Widget _row(Book b) {
-    debugPrint('row ${b.title}');
-    Widget trailing;
-    if (cart.contains(b)) {
-      trailing = const Text('Added');
-    } else {
-      trailing = OutlinedButton(
-        onPressed: () => onAdd(b),
-        child: const Text('Add'),
-      );
-    }
-    return ListTile(
-      title: Text(b.title),
-      subtitle: Text(b.author),
-      trailing: trailing,
+      body: ListView(children: [for (final b in shown) BookRow(book: b)]),
     );
   }
 }
